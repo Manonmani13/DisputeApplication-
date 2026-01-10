@@ -1,0 +1,38 @@
+">
+<body>
+    <h2>Dispute List</h2>
+
+    <form th:action="@{/disputes}" method="get">
+        <input type="text" name="custId" th:value="${param.custId}" placeholder="Customer ID">
+        <select name="status">
+            <option value="">All Statuses</option>
+            <option value="PENDING" th:selected="${param.status == 'PENDING'}">Pending</option>
+            <option value="APPROVED" th:selected="${param.status == 'APPROVED'}">Approved</option>
+            <option value="REJECTED" th:selected="${param.status == 'REJECTED'}">Rejected</option>
+        </select>
+        <button type="submit">Filter</button>
+        <a th:href="@{/disputes}">Clear</a>
+    </form>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Customer ID</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="dispute : ${disputes}">
+                <td th:text="${dispute.id}"></td>
+                <td th:text="${dispute.custId}"></td>
+                <td th:text="${dispute.status}"></td>
+                <td>
+                    <a th:href="@{/disputes/{id}(id=${dispute.id})}">View Details</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

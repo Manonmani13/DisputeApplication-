@@ -1,0 +1,27 @@
+">
+<body>
+    <h2>Dispute Detail</h2>
+    
+    <div th:object="${dispute}">
+        <p><strong>Dispute ID:</strong> <span th:text="*{id}"></span></p>
+        <p><strong>Status:</strong> <span th:text="*{status}"></span></p>
+        <p><strong>Claim Amount:</strong> $<span th:text="*{claimAmount}"></span></p>
+        <hr/>
+        <p><strong>Transaction ID:</strong> <span th:text="*{txnId}"></span></p>
+    </div>
+
+     <form th:action="@{/disputes/{id}/decision(id=${dispute.id})}" method="post">
+        <button type="submit" name="decision" value="APPROVE">Approve</button>
+        <button type="submit" name="decision" value="REJECT">Reject</button>
+        <button type="submit" name="decision" value="MANUAL_REVIEW">Manual Review</button>
+    </form>
+
+    <div th:if="${dispute.status == 'APPROVED'}">
+        <form th:action="@{/disputes/{id}/refund(id=${dispute.id})}" method="post">
+            <button type="submit" style="background-color: green; color: white;">Trigger Refund</button>
+        </form>
+    </div>
+    
+    <a th:href="@{/disputes}">Back to List</a>
+</body>
+</html>

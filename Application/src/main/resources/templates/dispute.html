@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Create Dispute</title>
+</head>
+<body>
+    <!-- Use th:action for dynamic URLs and method="post" for data submission -->
+    <form th:action="@{/disputes}" th:object="${dispute}" method="post">
+        
+        <label>Transaction ID:</label>
+        <input type="text" th:field="*{txnId}" required />
+        
+        <label>Customer ID:</label>
+        <input type="text" th:field="*{custId}" required />
+        
+        <label>Dispute Type:</label>
+        <input type="text" th:field="*{disputeType}" required />
+        
+        <label>Claim Amount:</label>
+        <input type="number" step="0.01" th:field="*{claimAmount}" required />
+        
+        <label>Actor:</label>
+        <input type="text" th:field="*{actor}" required />
+        
+        <button type="submit">Create Dispute</button>
+    </form>
+</body>
+</html>
